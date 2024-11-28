@@ -1,6 +1,11 @@
 import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class eCommerece_Test_Case_2 extends baseTest {
 
@@ -31,7 +36,11 @@ public class eCommerece_Test_Case_2 extends baseTest {
 
 //        Verify Cart Item
         driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.attributeContains(driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/toolbar_title")), "text", "Cart" ));
+        String shoeName = driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/productName")).getText();
+        Assert.assertEquals(shoeName, "Jordan 6 Rings");
+
 
     }
 }
